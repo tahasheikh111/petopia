@@ -2,11 +2,12 @@
 import { getSession } from 'next-auth/react';
 import Navbar from '@/components/Navbar';
 import Landing from '@/components/Landing';
+import DetectUserLocation from '@/components/DetectUserLocation';
 
 export default function HomePage(props) {
   return (
     <div className="relative bg-white w-full h-screen">
-      
+      <DetectUserLocation/>
       {/* Navbar */}
       <div className="absolute top-0 left-0 w-full z-50">
         <Navbar />

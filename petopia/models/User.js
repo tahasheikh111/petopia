@@ -1,4 +1,3 @@
-// models/User.js
 import mongoose from 'mongoose';
 
 const UserSchema = new mongoose.Schema({
@@ -10,19 +9,19 @@ const UserSchema = new mongoose.Schema({
     enum: ["user", "pet_sitter", "store_owner"], 
     default: ["user"] 
   },
-  profile_picture: { type: String },
+  profile_picture: { type: String, default: "" },
   location: {
-    address: { type: String },
+    address: { type: String, default: "" },
     coordinates: {
-      lat: { type: Number },
-      lng: { type: Number },
+      lat: { type: Number, default: 0 },
+      lng: { type: Number, default: 0 },
     }
   },
-  services: { type: Array, default: [] }, // Only for pet sitters
-  store_info: {
-    store_name: { type: String },
-    description: { type: String },
-  }, // Only for store owners
+  pet_sitter: {
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: 'PetSitter', 
+    default: null  // Set to null by default
+  }
 });
 
 export default mongoose.models.User || mongoose.model('User', UserSchema);
