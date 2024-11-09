@@ -56,6 +56,7 @@ export default NextAuth({
         session.user.id = token.id;
         session.user.email = token.email;
         session.user.username = token.username;
+        
       }
       return session;
     },

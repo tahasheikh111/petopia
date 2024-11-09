@@ -1,8 +1,24 @@
 // pages/index.js
 import { getSession } from 'next-auth/react';
+import Navbar from '@/components/Navbar';
+import Landing from '@/components/Landing';
 
 export default function HomePage(props) {
-  return <h1>Welcome to the Home Page {props.session.user.name}</h1>;
+  return (
+    <div className="relative bg-white w-full h-screen">
+      
+      {/* Navbar */}
+      <div className="absolute top-0 left-0 w-full z-50">
+        <Navbar />
+      </div>
+      
+      {/* Landing Component */}
+      <div className="w-full h-full">
+        <Landing />
+      </div>
+
+    </div>
+  );
 }
 
 export async function getServerSideProps(context) {
