@@ -3,11 +3,14 @@ import { getSession } from 'next-auth/react';
 import Navbar from '@/components/Navbar';
 import Landing from '@/components/Landing';
 import DetectUserLocation from '@/components/DetectUserLocation';
+import SeedUser from '@/components/SeedUser';
+import { FeaturedPetSitters } from '@/components/FeaturedPetSitters';
 
 export default function HomePage(props) {
   return (
     <div className="relative bg-white w-full h-screen">
       <DetectUserLocation/>
+      {/* <SeedUser/> */}
       {/* Navbar */}
       <div className="absolute top-0 left-0 w-full z-50">
         <Navbar />
@@ -16,6 +19,9 @@ export default function HomePage(props) {
       {/* Landing Component */}
       <div className="w-full h-full">
         <Landing />
+      </div>
+      <div className="w-full h-full">
+        <FeaturedPetSitters />
       </div>
 
     </div>

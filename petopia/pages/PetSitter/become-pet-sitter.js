@@ -40,8 +40,15 @@ const BecomePetSitter = () => {
   };
 
   return (
-    <div className="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-md">
-      <h1 className="text-2xl font-semibold mb-4 text-center">Become a Pet Sitter</h1>
+    <div className="w-full h-full bg-white">
+    <div className="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-md "
+    style={{
+        backgroundImage: 'url(/petsitter-bg.jpg)', // Replace with your image path
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
+      }}>
+
+      <h1 className="text-2xl font-semibold mb-4 text-center text-black">Become a Pet Sitter</h1>
       <form onSubmit={handleSubmit}>
         {/* Pet Type */}
         <div className="mb-4">
@@ -131,6 +138,7 @@ const BecomePetSitter = () => {
           </button>
         </div>
       </form>
+    </div>
     </div>
   );
 };

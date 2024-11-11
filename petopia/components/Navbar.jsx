@@ -61,7 +61,11 @@ const Navbar = () => {
             <h2 className="text-2xl font-bold mb-4 text-black">Services</h2>
             <ul className="space-y-2">
               <li className="p-2 hover:bg-gray-200 cursor-pointer rounded text-black">Launch Shop</li>
-              <li className="p-2 hover:bg-gray-200 cursor-pointer rounded text-black">Become a Sitter</li>
+              <Link href="/PetSitter/become-pet-sitter">
+                <li className="p-2 hover:bg-gray-200 cursor-pointer rounded text-black">
+                  Become a Sitter
+                </li>
+              </Link>
               <li className="p-2 hover:bg-gray-200 cursor-pointer rounded text-black">Start Clinic</li>
               <li className="p-2 hover:bg-gray-200 cursor-pointer rounded text-black">Become Trainer</li>
             </ul>
