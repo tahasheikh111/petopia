@@ -15,5 +15,12 @@ export default async function handler(req,res){
    await newProduct.save();
     res.status(200).json({message:"agya maal agya or data save hogya",data11:req.body})
    }
+   else if(req.method==='GET'){
+    // console.log("hhhhh")
+   const products=await Product.find({})
+//    console.log(products)
+   res.status(200).json({ prod:products,message:"data received" });
    
+   }
+
 }
