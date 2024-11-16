@@ -21,10 +21,10 @@ const Navbar = () => {
 
         {/* Navigation Links with Icons */}
         <div className="flex space-x-8 ml-4">
-          <Link href="/wearable" className="flex items-center">
-            <ShoppingBagIcon className="h-6 w-6 text-black" />
-            <Link className="hidden md:block text-black" href="/shop">Shop</Link>
-          </Link>
+        <Link href="/shop" className="flex items-center">
+          <ShoppingBagIcon className="h-6 w-6 text-black" />
+          <span className="hidden md:block text-black">Shop</span>
+        </Link>
           <Link href="/aboutus" className="flex items-center">
             <UserGroupIcon className="h-6 w-6 text-black" />
             <span className="hidden md:block text-black">Services</span>
