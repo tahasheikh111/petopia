@@ -17,26 +17,7 @@ export default function FeaturedProducts(props) {
   const r = useRouter()
   const products=props.products;
   console.log(products)
-  const products1 = [
-    {
-      id: 1,
-      name: 'Multivitamin For Cat',
-      price: '₦15,000.00',
-      description: 'Lorem ipsum dolor sit amet consectetur. Vitae donec pellentesque ut eget tempor egestas diam.',
-      image: '/temp.svg',
-      category:'cat'
-    },
-    {
-      id: 2,
-      name: 'Healthy Snacks For Dog',
-      price: '₦10,000.00',
-      description: 'Lorem ipsum dolor sit amet consectetur. Vitae donec pellentesque ut eget tempor egestas diam.',
-      image: '/temp.svg',
-      category:'dog'
-    },
-   
-  ]
-
+  
   const updateQuantity = (productId, increment) => {
     setQuantities((prev) => ({
       ...prev,
