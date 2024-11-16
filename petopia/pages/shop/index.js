@@ -1,27 +1,30 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import SearchItem from '@/components/SearchItem'
 import Categories from '@/components/Categories'
 import ProductCard from '@/components/ProductCard'
 import { useRouter } from 'next/router'
 import { PlusCircle, Sparkles } from 'lucide-react'
 
-export default function FeaturedProducts() {
+export default function FeaturedProducts(props) {
   const [activeCategory, setActiveCategory] = useState('cat')
   const [quantities, setQuantities] = useState({})
   const [searchQuery, setSearchQuery] = useState('')
   
-  const categories = ['cat', 'dog', 'fish', 'birds']
+  const categories = ['all products','cat', 'dog', 'fish', 'birds']
   
   const r = useRouter()
-  const products = [
+  const products=props.products;
+  console.log(products)
+  const products1 = [
     {
       id: 1,
       name: 'Multivitamin For Cat',
       price: '₦15,000.00',
       description: 'Lorem ipsum dolor sit amet consectetur. Vitae donec pellentesque ut eget tempor egestas diam.',
       image: '/temp.svg',
+      category:'cat'
     },
     {
       id: 2,
@@ -29,8 +32,9 @@ export default function FeaturedProducts() {
       price: '₦10,000.00',
       description: 'Lorem ipsum dolor sit amet consectetur. Vitae donec pellentesque ut eget tempor egestas diam.',
       image: '/temp.svg',
+      category:'dog'
     },
-    // Add more products as needed
+   
   ]
 
   const updateQuantity = (productId, increment) => {
@@ -63,8 +67,10 @@ export default function FeaturedProducts() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
             {products
-              .filter((product) => product.name.toLowerCase().includes(searchQuery.toLowerCase()))
+              .filter((product) => product.name.toLowerCase().includes(searchQuery.toLowerCase())&&
+              (activeCategory === 'all products' || product.category === activeCategory))
               .map((product) => (
+               
                 <ProductCard
                   key={product.id}
                   product={product}
@@ -102,4 +108,18 @@ export default function FeaturedProducts() {
       `}</style>
     </>
   )
+}
+
+
+export async function getStaticProps(){
+  
+  const response =await fetch('http://localhost:3000/api/addproduct');
+  const data=await response.json();
+  // console.log("ye rha data",data.message,data.prod);
+  return {
+    props: {
+      products: data.prod, // Pass products as props
+    },
+  };
+
 }
