@@ -3,13 +3,14 @@
  import Image from 'next/image'
 
 const ProductCard = ({ product, quantity, updateQuantity }) => (
+  
     <div
       key={product.id}
       className="group relative bg-white rounded-lg overflow-hidden w-full max-w-[375px]"
       style={{ height: '447px' }}
     >
       <div className="relative h-full">
-        <Image src={'/temp.svg'} alt={product.name} layout="fill" objectFit="cover" />
+        <Image src={product.imageUrll} alt={product.name}  objectFit="cover" width="449" height="447" />
         <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <div className="absolute top-4 right-4">
             <button className="text-white hover:scale-110 transition-transform">

@@ -17,7 +17,7 @@ export default function FeaturedProducts(props) {
   const r = useRouter()
   const products=props.products;
   console.log(products)
-  
+
   const updateQuantity = (productId, increment) => {
     setQuantities((prev) => ({
       ...prev,
@@ -96,7 +96,7 @@ export async function getStaticProps(){
   
   const response =await fetch('http://localhost:3000/api/addproduct');
   const data=await response.json();
-  // console.log("ye rha data",data.message,data.prod);
+
   return {
     props: {
       products: data.prod, // Pass products as props
