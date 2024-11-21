@@ -8,22 +8,23 @@ import { FeaturedPetSitters } from '@/components/FeaturedPetSitters';
 
 export default function HomePage(props) {
   return (
-    <div className="relative bg-white w-full h-screen">
-      <DetectUserLocation/>
-      {/* <SeedUser/> */}
+    <div className="relative bg-white w-full min-h-screen"> {/* min-h-screen instead of h-screen */}
+      <DetectUserLocation />
       {/* Navbar */}
-      <div className="absolute top-0 left-0 w-full z-50">
+      <div className="absolute w-full z-50">
         <Navbar />
       </div>
       
       {/* Landing Component */}
-      <div className="w-full h-full">
+      <div className="w-full h-auto"> {/* Added padding for spacing */}
         <Landing />
       </div>
-      <div className="w-full h-full">
+    
+
+      {/* Featured Pet Sitters Component */}
+      <div className="w-full h-auto">
         <FeaturedPetSitters />
       </div>
-
     </div>
   );
 }
@@ -41,7 +42,6 @@ export async function getServerSideProps(context) {
     };
   }
 
-  // Pass session data to the page as props if needed
   return {
     props: { session },
   };
