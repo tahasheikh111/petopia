@@ -3,7 +3,6 @@ import Product from "@/models/Product";
 import { createClient } from '@supabase/supabase-js';
 
 
-
 export default async function handler(req,res){
    await dbConnect(); 
     debugger;
