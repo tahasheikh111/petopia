@@ -114,7 +114,7 @@ export default function PetSitterMap() {
   }
 
   return (
-    <div className="flex flex-col md:flex-row h-screen">
+    <div className="flex flex-col md:flex-row h-screen bg-white">
       <div className="w-full md:w-1/3 p-4">
         <ScrollArea className="h-[calc(100vh-2rem)]">
           {petSitters.map((sitter) => (

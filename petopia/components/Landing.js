@@ -1,5 +1,6 @@
 // components/Landing.js
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Landing() {
   return (
@@ -22,13 +23,19 @@ export default function Landing() {
         
         {/* Information Tags */}
         <div className="absolute top-1/3 left-1/4 transform -translate-x-1/2 -translate-y-1/2 bg-white p-3 rounded-lg shadow-md z-30">
-          <p className="font-semibold text-black">Shop</p>
+          <Link href="/Shop">
+            <p className="font-semibold text-black">Shop</p>
+          </Link>
         </div>
         <div className="absolute bottom-1/3 left-3/4 transform -translate-x-1/2 bg-white p-3 rounded-lg shadow-md z-30">
-          <p className="font-semibold text-black text-right">Adoption</p>
+          <Link href="/adoption">
+            <p className="font-semibold text-black text-right">Adoption</p>
+          </Link>
         </div>
         <div className="absolute bottom-1/4 left-1/4 transform -translate-x-1/2 bg-white p-3 rounded-lg shadow-md z-30">
-          <p className="font-semibold text-black">Sitter</p>
+          <Link href="/petsitters">
+            <p className="font-semibold text-black">Sitter</p>
+          </Link>
         </div>
       </div>
 

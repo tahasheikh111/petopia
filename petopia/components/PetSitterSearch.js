@@ -38,7 +38,7 @@ export const PetSitterSearch = ({ onSearch }) => {
       </div>
       <button
         type="submit"
-        className="w-full md:w-auto px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 flex items-center justify-center gap-2"
+        className="w-full md:w-auto px-6 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 flex items-center justify-center gap-2"
       >
         <Search size={20} />
         Search
