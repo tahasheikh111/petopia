@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import SearchItem from '@/components/SearchItem'
 import Categories from '@/components/Categories'
 import ProductCard from '@/components/ProductCard'
@@ -12,30 +12,18 @@ export default function FeaturedProducts(props) {
   const [quantities, setQuantities] = useState({})
   const [searchQuery, setSearchQuery] = useState('')
   
-  const categories = ['all products','cat', 'dog', 'fish', 'birds']
-  
+  const categories = ['all products', 'cat', 'dog', 'fish', 'birds']
   const r = useRouter()
-  const products=props.products;
-  console.log(products)
-  const products1 = [
-    {
-      id: 1,
-      name: 'Multivitamin For Cat',
-      price: '₦15,000.00',
-      description: 'Lorem ipsum dolor sit amet consectetur. Vitae donec pellentesque ut eget tempor egestas diam.',
-      image: '/temp.svg',
-      category:'cat'
-    },
-    {
-      id: 2,
-      name: 'Healthy Snacks For Dog',
-      price: '₦10,000.00',
-      description: 'Lorem ipsum dolor sit amet consectetur. Vitae donec pellentesque ut eget tempor egestas diam.',
-      image: '/temp.svg',
-      category:'dog'
-    },
-   
-  ]
+  const products = props.products
+
+  useEffect(() => {
+    // Initialize quantities
+    const initialQuantities = {}
+    products.forEach((product) => {
+      initialQuantities[product._id] = 1 // Default quantity
+    })
+    setQuantities(initialQuantities)
+  }, [products])
 
   const updateQuantity = (productId, increment) => {
     setQuantities((prev) => ({
@@ -46,80 +34,66 @@ export default function FeaturedProducts(props) {
 
   const btnhandler2 = (e) => {
     e.preventDefault()
-    console.log("hello")
     r.push('/addProduct')
   }
 
   return (
-    <>
-      <div className="bg-[#FFFFFF] min-h-screen p-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex justify-between items-center mb-8">
-            <h1 className="text-[#000000] text-3xl font-bold">Featured Products</h1>
-            <SearchItem searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-          </div>
+    <div className="bg-[#FFFFFF] min-h-screen p-8">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-[#000000] text-3xl font-bold">Featured Products</h1>
+          <SearchItem searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+        </div>
 
-          <Categories
-            categories={categories}
-            activeCategory={activeCategory}
-            setActiveCategory={setActiveCategory}
-          />
+        <Categories
+          categories={categories}
+          activeCategory={activeCategory}
+          setActiveCategory={setActiveCategory}
+        />
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
-            {products
-              .filter((product) => product.name.toLowerCase().includes(searchQuery.toLowerCase())&&
-              (activeCategory === 'all products' || product.category === activeCategory))
-              .map((product) => (
-               
-                <ProductCard
-                  key={product.id}
-                  product={product}
-                  quantity={quantities[product.id]}
-                  updateQuantity={updateQuantity}
-                />
-              ))}
-          </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
+          {products
+            .filter(
+              (product) =>
+                product.name.toLowerCase().includes(searchQuery.toLowerCase()) &&
+                (activeCategory === 'all products' || product.category === activeCategory)
+            )
+            .map((product) => (
+              <ProductCard
+                key={product._id}
+                product={product}
+                quantity={quantities[product._id]}
+                updateQuantity={updateQuantity}
+              />
+            ))}
+        </div>
 
-          <div className="flex justify-center mt-8">
-            <button
-              onClick={btnhandler2}
-              className="group relative overflow-hidden bg-[#243961] hover:bg-[#1a2d4a] text-white font-bold py-3 px-6 rounded-full shadow-lg transform transition-all duration-300 ease-in-out hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#243961] focus:ring-opacity-50"
-              aria-label="Add new product"
-            >
-              <span className="relative z-10 flex items-center">
-                <PlusCircle className="w-5 h-5 mr-2" />
-                Want to add product??
-                <Sparkles className="w-5 h-5 ml-2 animate-pulse" />
-              </span>
-              <span className="absolute top-0 left-0 w-full h-full bg-white opacity-20 transform -skew-x-12 -translate-x-full transition-transform duration-700 ease-in-out group-hover:translate-x-0"></span>
-            </button>
-          </div>
+        <div className="flex justify-center mt-8">
+          <button
+            onClick={btnhandler2}
+            className="group relative overflow-hidden bg-[#243961] hover:bg-[#1a2d4a] text-white font-bold py-3 px-6 rounded-full shadow-lg transform transition-all duration-300 ease-in-out hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#243961] focus:ring-opacity-50"
+            aria-label="Add new product"
+          >
+            <span className="relative z-10 flex items-center">
+              <PlusCircle className="w-5 h-5 mr-2" />
+              Want to add product??
+              <Sparkles className="w-5 h-5 ml-2 animate-pulse" />
+            </span>
+            <span className="absolute top-0 left-0 w-full h-full bg-white opacity-20 transform -skew-x-12 -translate-x-full transition-transform duration-700 ease-in-out group-hover:translate-x-0"></span>
+          </button>
         </div>
       </div>
-
-      <style jsx>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-10px); }
-        }
-        .animate-float {
-          animation: float 3s ease-in-out infinite;
-        }
-      `}</style>
-    </>
+    </div>
   )
 }
 
+export async function getStaticProps() {
+  const response = await fetch('http://localhost:3000/api/addproduct')
+  const data = await response.json()
 
-export async function getStaticProps(){
-  
-  const response =await fetch('http://localhost:3000/api/addproduct');
-  const data=await response.json();
-  // console.log("ye rha data",data.message,data.prod);
   return {
     props: {
-      products: data.prod, // Pass products as props
+      products: data.prod,
     },
-  };
-
+  }
 }
