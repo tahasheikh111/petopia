@@ -4,8 +4,10 @@ import Categories from '@/components/Categories'
 import ProductCard from '@/components/ProductCard'
 import { useRouter } from 'next/router'
 import { PlusCircle, Sparkles } from 'lucide-react'
+import Navbar from '@/components/Navbar'
 
 export default function FeaturedProducts(props) {
+  
   const [activeCategory, setActiveCategory] = useState('cat')
   const [quantities, setQuantities] = useState({})
   const [searchQuery, setSearchQuery] = useState('')
@@ -36,6 +38,7 @@ export default function FeaturedProducts(props) {
   }
 
   return (
+    
     <div className="bg-[#FFFFFF] min-h-screen p-8">
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center mb-8">
