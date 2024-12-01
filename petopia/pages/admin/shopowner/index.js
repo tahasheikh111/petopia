@@ -83,8 +83,10 @@ export default function AdminPanel() {
   if (!session) return <p className="text-center mt-8">Please log in to view this page.</p>
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-6 flex items-center">
+    <div className="mx-auto p-4 w-full h-full "style={{
+        backgroundImage: "url('/paws.png')",
+      }}>
+      <h1 className="text-3xl font-bold mb-6 flex text-black items-center text-center">
         <Paw className="mr-2" />
         Pet Products Admin Panel
       </h1>
