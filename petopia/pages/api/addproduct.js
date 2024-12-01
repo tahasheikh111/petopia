@@ -21,12 +21,29 @@ export default async function handler(req,res){
    await newProduct.save();
     res.status(200).json({message:"agya maal agya or data save hogya",data11:req.body})
    }
-   else if(req.method==='GET'){
-    // console.log("hhhhh")
-   const products=await Product.find({})
-//    console.log(products)
-   res.status(200).json({ prod:products,message:"data received" });
-   
-   }
+   else if (req.method === 'GET') {
+      const { status, id } = req.body;
+    
+      if (status === 'id') {
+        try {
+          const product = await Product.findById(id); 
+          if (!product) {
+            return res.status(404).json({ message: 'Product not found' }); 
+          }
+          return res.status(200).json({ prod:product });
+        } catch (error) {
+          return res.status(500).json({ message: 'Error fetching product', error: error.message });
+        }
+      }
+    
+      try {
+        
+        const products = await Product.find({});
+        return res.status(200).json({ prod: products, message: 'Data received' });
+      } catch (error) {
+        return res.status(500).json({ message: 'Error fetching products', error: error.message });
+      }
+    }
+    
 
 }
