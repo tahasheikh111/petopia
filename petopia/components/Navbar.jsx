@@ -3,9 +3,11 @@ import Link from "next/link";
 import { useState } from "react";
 import { ShoppingBagIcon, UserGroupIcon, PhoneIcon, PencilAltIcon, LogoutIcon } from '@heroicons/react/solid';
 import { signOut } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 
 const Navbar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const { data: session } = useSession();
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -74,7 +76,10 @@ const Navbar = () => {
               <li className="p-2 hover:bg-gray-200 cursor-pointer rounded text-black">Profile</li>
               <li className="p-2 hover:bg-gray-200 cursor-pointer rounded text-black">Settings</li>
               <li className="p-2 hover:bg-gray-200 cursor-pointer rounded text-black">Shop</li>
-              <li className="p-2 hover:bg-gray-200 cursor-pointer rounded text-black">Sitter</li>
+              <li className="p-2 hover:bg-gray-200 cursor-pointer rounded text-black">
+                <Link href={`/admin/petsitter/${session?.user?.id}`}>
+                  Sitter
+                </Link></li>
               <li className="p-2 hover:bg-gray-200 cursor-pointer rounded text-black">Clinic</li>
               <li className="p-2 hover:bg-gray-200 cursor-pointer rounded text-black">Trainer</li>
               <li

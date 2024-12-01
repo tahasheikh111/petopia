@@ -291,6 +291,13 @@
   resolved "https://registry.npmjs.org/@radix-ui/react-direction/-/react-direction-1.1.0.tgz"
   integrity sha512-BUuBvgThEiAXh2DWu93XsT+a3aWrGqolGlqqw5VU1kG7p/ZH2cuDlM1sRLNnY3QcBS69UIz2mcKhMxDsdewhjg==
 
+"@radix-ui/react-label@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.npmjs.org/@radix-ui/react-label/-/react-label-2.1.0.tgz"
+  integrity sha512-peLblDlFw/ngk3UWq0VnYaOLy6agTZZ+MUO/WhVfm14vJGML+xH4FAl2XQGLqdefjNb7ApRg6Yn7U42ZhmYXdw==
+  dependencies:
+    "@radix-ui/react-primitive" "2.0.0"
+
 "@radix-ui/react-presence@1.1.1":
   version "1.1.1"
   resolved "https://registry.npmjs.org/@radix-ui/react-presence/-/react-presence-1.1.1.tgz"
@@ -1672,6 +1679,13 @@ form-data@^3.0.0:
     combined-stream "^1.0.8"
     mime-types "^2.1.12"
 
+framer-motion@^11.12.0:
+  version "11.12.0"
+  resolved "https://registry.npmjs.org/framer-motion/-/framer-motion-11.12.0.tgz"
+  integrity sha512-gZaZeqFM6pX9kMVti60hYAa75jGpSsGYWAHbBfIkuHN7DkVHVkxSxeNYnrGmHuM0zPkWTzQx10ZT+fDjn7N4SA==
+  dependencies:
+    tslib "^2.4.0"
+
 fs.realpath@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/fs.realpath/-/fs.realpath-1.0.0.tgz"
@@ -3006,7 +3020,7 @@ quickselect@^3.0.0:
   resolved "https://registry.npmjs.org/quickselect/-/quickselect-3.0.0.tgz"
   integrity sha512-XdjUArbK4Bm5fLLvlm5KpTFOiOThgfWWI4axAZDWg4E/0mKdZyI9tNEfds27qCi1ze/vwTR16kvmmGhRra3c2g==
 
-"react-dom@^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc", "react-dom@^17.0.2 || ^18", "react-dom@^18.2.0 || 19.0.0-rc-66855b96-20241106", react-dom@19.0.0-rc-66855b96-20241106:
+"react-dom@^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc", "react-dom@^17.0.2 || ^18", react-dom@^18.0.0, "react-dom@^18.2.0 || 19.0.0-rc-66855b96-20241106", react-dom@19.0.0-rc-66855b96-20241106:
   version "19.0.0-rc-66855b96-20241106"
   resolved "https://registry.npmjs.org/react-dom/-/react-dom-19.0.0-rc-66855b96-20241106.tgz"
   integrity sha512-D25vdaytZ1wFIRiwNU98NPQ/upS2P8Co4/oNoa02PzHbh8deWdepjm5qwZM/46OdSiGv4WSWwxP55RO9obqJEQ==
@@ -3018,7 +3032,7 @@ react-is@^16.13.1:
   resolved "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
-"react@^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0-rc", "react@^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc", "react@^17.0.2 || ^18", "react@^18.2.0 || 19.0.0-rc-66855b96-20241106", "react@>= 16", "react@>= 16.8.0 || 17.x.x || ^18.0.0-0 || ^19.0.0-0", react@19.0.0-rc-66855b96-20241106:
+"react@^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0-rc", "react@^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc", "react@^17.0.2 || ^18", react@^18.0.0, "react@^18.2.0 || 19.0.0-rc-66855b96-20241106", "react@>= 16", "react@>= 16.8.0 || 17.x.x || ^18.0.0-0 || ^19.0.0-0", react@19.0.0-rc-66855b96-20241106:
   version "19.0.0-rc-66855b96-20241106"
   resolved "https://registry.npmjs.org/react/-/react-19.0.0-rc-66855b96-20241106.tgz"
   integrity sha512-klH7xkT71SxRCx4hb1hly5FJB21Hz0ACyxbXYAECEqssUjtJeFUAaI2U1DgJAzkGEnvEm3DkxuBchMC/9K4ipg==
