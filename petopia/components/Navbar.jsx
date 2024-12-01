@@ -81,7 +81,8 @@ const Navbar = () => {
               <li className="p-2 hover:bg-gray-200 cursor-pointer rounded text-black">
                 <Link href={`/admin/petsitter/${session?.user?.id}`}>
                   Sitter
-                </Link></li>
+                </Link>
+              </li>
               <li className="p-2 hover:bg-gray-200 cursor-pointer rounded text-black">Clinic</li>
               <li className="p-2 hover:bg-gray-200 cursor-pointer rounded text-black">Trainer</li>
               <li

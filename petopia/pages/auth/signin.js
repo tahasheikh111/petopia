@@ -25,16 +25,16 @@ export default function SignIn() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 text-black">
       <div className="bg-white p-8 rounded-lg shadow-md max-w-md w-full">
-        <h1 className="text-2xl font-bold mb-6 text-center">Sign In</h1>
+        <h1 className="text-2xl font-bold mb-6 text-center text-black">Sign In</h1>
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="text"
             placeholder="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            className="w-full p-2 border rounded-md"
+            className="w-full p-2 border rounded-md text-black"
             required
           />
           <input
@@ -42,18 +42,18 @@ export default function SignIn() {
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full p-2 border rounded-md"
+            className="w-full p-2 border rounded-md text-black"
             required
           />
           <button
             type="submit"
-            className="w-full p-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+            className="w-full p-2 bg-yellow-600 text-black rounded-md hover:bg-yellow-700"
           >
             Sign In
           </button>
         </form>
         <p className="mt-4 text-center">
-          Don't have an account? <a href="/auth/signup" className="text-blue-600">Sign Up</a>
+          Don't have an account? <a href="/auth/signup" className="text-black-600">Sign Up</a>
         </p>
       </div>
     </div>

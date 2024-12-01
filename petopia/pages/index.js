@@ -5,6 +5,7 @@ import Landing from '@/components/Landing';
 import DetectUserLocation from '@/components/DetectUserLocation';
 import SeedUser from '@/components/SeedUser';
 import { FeaturedPetSitters } from '@/components/FeaturedPetSitters';
+import Footer from '@/components/Footer';
 
 export default function HomePage(props) {
   return (
@@ -25,6 +26,7 @@ export default function HomePage(props) {
       <div className="w-full h-auto">
         <FeaturedPetSitters />
       </div>
+      <Footer/>
     </div>
   );
 }

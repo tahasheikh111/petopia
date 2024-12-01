@@ -49,7 +49,7 @@ export const FeaturedPetSitters = () => {
           <h2 className="text-3xl font-bold text-gray-900">Featured Pet Sitters</h2>
           <Link 
             href="/petsitters" 
-            className="flex items-center text-blue-600 hover:text-blue-700 transition-colors"
+            className="flex items-center text-yellow-600 hover:text-text-700 transition-colors"
           >
             View All 
             <ArrowRight className="ml-2 h-4 w-4" />

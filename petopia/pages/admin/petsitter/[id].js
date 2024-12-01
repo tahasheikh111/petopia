@@ -10,173 +10,211 @@ import Image from "next/image";
 import {motion} from 'framer-motion';
 // Modal for editing pet sitter details
 const EditModal = ({ petSitter, isOpen, onClose, onSave }) => {
-    // Initialize form data with petSitter or empty values if it's not provided
-    const [uploading, setUploading] = useState(false);
-    console.log(petSitter);
-    const [formData, setFormData] = useState({
-      id: petSitter?._id || '',  // Use optional chaining and provide a fallback
+  const [uploading, setUploading] = useState(false);
+  const [formData, setFormData] = useState({
+    id: petSitter?._id || '',
+    hourly_rate: petSitter?.hourly_rate || '',
+    experience: petSitter?.experience || '',
+    location: petSitter?.location || { address: '', coordinates: { lat: '', lng: '' } },
+    availability: petSitter?.availability || '',
+    rating: petSitter?.rating || '',
+    imageUrl: petSitter?.imageUrl || '',
+  });
+
+  useEffect(() => {
+    setFormData({
+      id: petSitter?._id || '',
       hourly_rate: petSitter?.hourly_rate || '',
       experience: petSitter?.experience || '',
-      location: petSitter?.location || '', // Use optional chaining
+      location: petSitter?.location || { address: '', coordinates: { lat: '', lng: '' } },
       availability: petSitter?.availability || '',
       rating: petSitter?.rating || '',
-      imageUrl: petSitter?.imageUrl || "",
+      imageUrl: petSitter?.imageUrl || '',
     });
-  
-    // When petSitter changes, update the form data
-    useEffect(() => {
-      setFormData({
-        id: petSitter?._id || '',
-        hourly_rate: petSitter?.hourly_rate || '',
-        experience: petSitter?.experience || '',
-        location: petSitter?.location || '',
-        availability: petSitter?.availability || '',
-        rating: petSitter?.rating || '',
-        imageUrl: petSitter?.imageUrl || "",
-      });
-    }, [petSitter]);
-  
-    const handleInputChange = (e) => {
-      const { name, value } = e.target;
-      setFormData((prevData) => ({
-        ...prevData,
-        [name]: value
-      }));
-    };
-    const handleImageUpload = async (file) => {
-        setUploading(true);
-        const fileExt = file.name.split(".").pop();
-        const fileName = `${Date.now()}.${fileExt}`;
-        const filePath = `petsitters/${fileName}`;
-    
-        try {
-          const { data: uploadData, error: uploadError } = await supabase.storage
+  }, [petSitter]);
+  const handleImageUpload = async (file) => {
+    setUploading(true);
+    const fileExt = file.name.split(".").pop();
+    const fileName = `${Date.now()}.${fileExt}`;
+    const filePath = `petsitters/${fileName}`;
+
+    try {
+        const { data: uploadData, error: uploadError } = await supabase.storage
             .from("images")
             .upload(filePath, file);
-    
-          if (uploadError) {
+
+        if (uploadError) {
             console.error("Upload Error:", uploadError);
             alert("Image upload failed. Please try again.");
             return null;
-          }
-    
-          const { data: publicData, error: urlError } = supabase.storage
+        }
+
+        const { data: publicData, error: urlError } = supabase.storage
             .from("images")
             .getPublicUrl(filePath);
-    
-          if (urlError) {
+
+        if (urlError) {
             console.error("URL Fetch Error:", urlError);
             alert("Failed to retrieve image URL.");
             return null;
-          }
-    
-          setFormData((prevData) => ({
+        }
+
+        setFormData((prevData) => ({
             ...prevData,
             imageUrl: publicData.publicUrl,
-          }));
-          alert("Image uploaded successfully!");
-          return publicData.publicUrl;
-        } catch (err) {
-          console.error("Unexpected Error:", err.message);
-          alert("An unexpected error occurred. Check the console for details.");
-          return null;
-        } finally {
-          setUploading(false);
-        }
-      };
-  
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-      console.log(formData);
-      await onSave(formData);  // Pass the updated data (including the id) to onSave
-      onClose();  // Close the modal
-    };
-  
-    if (!isOpen) return null;  // If modal isn't open, return nothing
-  
-    return (
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center pt-10 z-50 overflow-y-auto"
-        >
-          <motion.div
-            initial={{ scale: 0.9, y: 50 }}
-            animate={{ scale: 1, y: 0 }}
-            exit={{ scale: 0.9, y: 50 }}
-            className="w-full max-w-md"
-          >
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-2xl font-bold text-yellow-800">Edit Pet Sitter</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="hourly_rate">Hourly Rate</Label>
-                    <Input
-                      id="hourly_rate"
-                      type="number"
-                      name="hourly_rate"
-                      value={formData.hourly_rate}
-                      onChange={handleInputChange}
+        }));
+        alert("Image uploaded successfully!");
+        return publicData.publicUrl;
+    } catch (err) {
+        console.error("Unexpected Error:", err.message);
+        alert("An unexpected error occurred. Check the console for details.");
+        return null;
+    } finally {
+        setUploading(false);
+    }
+  };
+
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    if (name === 'address') {
+      setFormData((prevData) => ({
+        ...prevData,
+        location: { ...prevData.location, address: value },
+      }));
+    } else if (name === 'lat' || name === 'lng') {
+      setFormData((prevData) => ({
+        ...prevData,
+        location: {
+          ...prevData.location,
+          coordinates: {
+            ...prevData.location.coordinates,
+            [name]: value,
+          },
+        },
+      }));
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(formData);
+    await onSave(formData);  // Pass the updated data (including the id) to onSave
+    onClose();  // Close the modal
+  };
+
+  if (!isOpen) return null;  // If modal isn't open, return nothing
+
+  return (
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center pt-10 z-50 overflow-y-auto"
+    >
+      <motion.div
+        initial={{ scale: 0.9, y: 50 }}
+        animate={{ scale: 1, y: 0 }}
+        exit={{ scale: 0.9, y: 50 }}
+        className="w-full max-w-md"
+      >
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-2xl font-bold text-yellow-800">Edit Pet Sitter</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="hourly_rate">Hourly Rate</Label>
+                <Input
+                  id="hourly_rate"
+                  type="number"
+                  name="hourly_rate"
+                  value={formData.hourly_rate}
+                  onChange={handleInputChange}
+                />
+              </div>
+              
+              <div className="space-y-2">
+                <Label htmlFor="profile_image">Profile Image</Label>
+                <Input
+                  id="profile_image"
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => handleImageUpload(e.target.files[0])}
+                />
+                {uploading && <p className="text-yellow-600 text-sm">Uploading...</p>}
+                {formData.imageUrl && (
+                  <div className="mt-2 relative w-full h-40">
+                    <Image 
+                      src={formData.imageUrl} 
+                      alt="Preview" 
+                      fill 
+                      className="rounded-md object-cover"
                     />
                   </div>
-                  
-                  <div className="space-y-2">
-                    <Label htmlFor="profile_image">Profile Image</Label>
-                    <Input
-                      id="profile_image"
-                      type="file"
-                      accept="image/*"
-                      onChange={(e) => handleImageUpload(e.target.files[0])}
-                    />
-                    {uploading && <p className="text-yellow-600 text-sm">Uploading...</p>}
-                    {formData.imageUrl && (
-                      <div className="mt-2 relative w-full h-40">
-                        <Image 
-                          src={formData.imageUrl} 
-                          alt="Preview" 
-                          fill 
-                          className="rounded-md object-cover"
-                        />
-                      </div>
-                    )}
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <Label htmlFor="experience">Experience (years)</Label>
-                    <Input
-                      id="experience"
-                      type="number"
-                      name="experience"
-                      value={formData.experience}
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <Label htmlFor="location">Location</Label>
-                    <Input
-                      id="location"
-                      type="text"
-                      name="location"
-                      value={formData.location}
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <Label htmlFor="availability">Availability</Label>
-                    <Input
-                      id="availability"
-                      type="text"
-                      name="availability"
-                      value={formData.availability}
-                      onChange={handleInputChange}
-                    />
-                  </div>
+                )}
+              </div>
+              
+              <div className="space-y-2">
+                <Label htmlFor="experience">Experience (years)</Label>
+                <Input
+                  id="experience"
+                  type="number"
+                  name="experience"
+                  value={formData.experience}
+                  onChange={handleInputChange}
+                />
+              </div>
+              
+              <div className="space-y-2">
+                <Label htmlFor="location_address">Address</Label>
+                <Input
+                  id="location_address"
+                  type="text"
+                  name="address"
+                  value={formData.location.address}
+                  onChange={handleInputChange}
+                />
+              </div>
+              
+              {/* <div className="space-y-2">
+                <Label htmlFor="lat">Latitude</Label>
+                <Input
+                  id="lat"
+                  type="number"
+                  name="lat"
+                  value={formData.location.coordinates.lat}
+                  onChange={handleInputChange}
+                />
+              </div>
+              
+              <div className="space-y-2">
+                <Label htmlFor="lng">Longitude</Label>
+                <Input
+                  id="lng"
+                  type="number"
+                  name="lng"
+                  value={formData.location.coordinates.lng}
+                  onChange={handleInputChange}
+                />
+              </div> */}
+              
+              <div className="space-y-2">
+                <Label htmlFor="availability">Availability</Label>
+                <Input
+                  id="availability"
+                  type="text"
+                  name="availability"
+                  value={formData.availability}
+                  onChange={handleInputChange}
+                />
+              </div>
               <CardFooter className="flex justify-between">
                 <Button type="submit" className="bg-yellow-600 text-white hover:bg-yellow-700">
                   Save
@@ -186,12 +224,13 @@ const EditModal = ({ petSitter, isOpen, onClose, onSave }) => {
                 </Button>
               </CardFooter>
             </form>
-              </CardContent>
-            </Card>
-          </motion.div>
-        </motion.div>
-    );
-}
+          </CardContent>
+        </Card>
+      </motion.div>
+    </motion.div>
+  );
+};
+
   
   
 
@@ -309,7 +348,7 @@ const PetSitterAdminPage = ({ user, petSitters, error }) => {
               <CardContent className="pt-4">
                 <p className="text-yellow-700 font-medium">Hourly Rate: ${petSitter.hourly_rate}</p>
                 <p className="text-gray-600">Experience: {petSitter.experience} years</p>
-                <p className="text-gray-600">Location: {petSitter.location}</p>
+                <p className="text-gray-600">Location: {petSitter.location.address}</p>
                 <p className="text-gray-600">Availability: {petSitter.availability}</p>
                 <p className="text-yellow-600 font-medium">Rating: {petSitter.rating}/5</p>
               </CardContent>
