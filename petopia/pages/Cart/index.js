@@ -115,7 +115,7 @@ const Cart = ({ cart_products,mess }) => {
      </div>}
       <AnimatePresence>
         {checkout && (
-          <SlideInChechout onClose={() =>setCheckout(false)} total_price={total} cart={cart_products}/>
+          <SlideInChechout onClose={() =>setCheckout(false)} total_price={total} cart={items}/>
         )}
       </AnimatePresence>
     </div>

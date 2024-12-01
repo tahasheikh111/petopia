@@ -6,7 +6,6 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 
 export default function SlideInCheckout({ onClose, total_price,cart }) {
-    
     const btnhandler4=()=>{
         
         fetch("/api/cartItem", {
@@ -17,7 +16,7 @@ export default function SlideInCheckout({ onClose, total_price,cart }) {
             },
         })
         .then((res) => res.json()) // Parses the response to JSON
-        .then((data) => console.log(data)) // Logs the response data
+        .then((data) => alert(data.message)) // Logs the response data
         .catch((error) => console.error("Error:", error)); // Adds error handling
 
         onClose();

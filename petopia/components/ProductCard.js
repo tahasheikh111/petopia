@@ -30,6 +30,9 @@ const ProductCard = ({ product, quantity, updateQuantity }) => {
 
     r.push(`/Cart`);
   }
+  const btnhandler6=()=>{
+    r.push(`/shop/productDetails/${product._id}`)
+  }
   return(
   
     <div
@@ -70,6 +73,9 @@ const ProductCard = ({ product, quantity, updateQuantity }) => {
               </div>
               <button onClick={btnhandler3}className="bg-[#1B2B4D] text-white px-6 py-2 rounded-md hover:bg-[#243961] transition-colors">
                 Add to cart
+              </button>
+              <button onClick={btnhandler6}>
+                push
               </button>
             </div>
           </div>

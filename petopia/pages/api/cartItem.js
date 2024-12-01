@@ -2,6 +2,8 @@ import User from '@/models/User';
 import dbConnect from '@/lib/mongodb';
 import Product from '@/models/Product';
 import CartItem from '@/models/CartItem';
+import Order from '@/models/Order';
+
 
 
 
@@ -10,8 +12,12 @@ dbConnect();
 export default async function handler(req,res){
     if(req.method==='POST'){
         const {product,quantity,user}=req.body;
+        
         const {cart,check}=req.body;
-        if (check === 'updatee') {
+        console.log("gg",cart);
+        
+        if (check === 'update') {
+            console.log("i am in update")
             for (const item of cart) {
                 const cartId = item._id; // Extract the _id field
                 const exist = await CartItem.findById(cartId); // Use the extracted _id
@@ -19,12 +25,18 @@ export default async function handler(req,res){
                 if (!exist) {
                     return res.status(404).json({ message: `Cart item with ID ${cartId} not found` });
                 }
-        
-                exist.status = 'completed';
-                await exist.save();
+             const order=new Order({
+                product:item.product._id,
+                user:item.user._id,
+                quantity:item.quantity
+             })
+             await order.save();
+             await CartItem.findByIdAndDelete(cartId);
+             
+
             }
         
-            return res.status(200).json({ message: 'Cart item statuses updated successfully' });
+            return res.status(200).json({ message: 'Cart item added in order and delete from cart' });
         }  
 
 
