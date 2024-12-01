@@ -75,7 +75,9 @@ const Navbar = () => {
             <ul className="space-y-2">
               <li className="p-2 hover:bg-gray-200 cursor-pointer rounded text-black">Profile</li>
               <li className="p-2 hover:bg-gray-200 cursor-pointer rounded text-black">Settings</li>
-              <li className="p-2 hover:bg-gray-200 cursor-pointer rounded text-black">Shop</li>
+              <li className="p-2 hover:bg-gray-200 cursor-pointer rounded text-black">
+                <Link href="/admin/shopowner">Shop</Link>
+              </li>
               <li className="p-2 hover:bg-gray-200 cursor-pointer rounded text-black">
                 <Link href={`/admin/petsitter/${session?.user?.id}`}>
                   Sitter
