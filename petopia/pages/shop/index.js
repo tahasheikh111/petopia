@@ -1,5 +1,3 @@
-'use client'
-
 import { useEffect, useState } from 'react'
 import SearchItem from '@/components/SearchItem'
 import Categories from '@/components/Categories'
