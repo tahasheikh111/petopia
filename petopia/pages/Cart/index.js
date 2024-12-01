@@ -1,5 +1,3 @@
-"use client";
-
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MinusIcon, PlusIcon } from "lucide-react";
@@ -32,7 +30,9 @@ const Cart = ({ cart_products,mess }) => {
 
   return (
     <>
-    <Navbar/>
+    <div className="bg-white">
+      <Navbar/>
+    </div>
     <div className="flex min-h-screen items-center justify-center bg-[#101828]">
       {cart_products.length>0?(<Card className="mx-auto w-[90%] max-w-4xl overflow-hidden bg-[#233250] text-white shadow-xl">
         <div className="p-6">

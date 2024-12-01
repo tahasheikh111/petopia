@@ -5,19 +5,19 @@ import Link from 'next/link';
 
 const Footer = () => {
   return (
-    <footer className="bg-pink-950 text-white">
+    <footer className="bg-yellow-400 text-black">
       <div className="container mx-auto px-4 py-8">
         <div className="flex flex-wrap justify-between items-start">
           {/* Logo and Email Input */}
           <div className="w-full md:w-1/2 mb-6 md:mb-0">
             <Image 
-              src="/vi_try_logo.png" 
+              src="/logo-removebg.png" 
               alt="Logo" 
               width={48} 
               height={48} 
               className="w-12 h-12 mb-4" 
             />
-            <div className="flex items-center bg-pink-950 border-2 border-rose-200 rounded-full p-1 max-w-xs">
+            <div className="flex items-center bg-yellow-500 border-2 border-rose-200 rounded-full p-1 max-w-xs">
               <input
                 type="email"
                 placeholder="Send an email to us"
@@ -71,14 +71,8 @@ const Footer = () => {
       {/* Bottom Bar */}
       <div className="border-t border-rose-200 border-dashed">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <p>© VI Try 2024</p>
+          <p>© Petopia 2024</p>
           <div className="flex items-center space-x-2">
-            <Image 
-            src={'/Pakistan_flag.png'}
-            alt={'Pakistan'}
-            width={30}
-            height={30}
-            />
             <span>🇵🇰 Pakistan</span>
             <select className="bg-transparent border-none">
               <option>PKR</option>

@@ -29,7 +29,7 @@ export const PetSitterCard = ({ petsitter }) => {
       >
         <div className="relative w-full h-full">
           <Image
-            src={`/sitter.jpg`}
+            src={petsitter.imageUrl}
             alt={`Pet Sitter ${petsitter.user}`}
             fill
             className={`object-cover transition-all duration-300 ${isHovered ? 'opacity-30' : 'opacity-100'}`}

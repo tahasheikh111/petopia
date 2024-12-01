@@ -23,16 +23,16 @@ export default function SignUp() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="bg-white p-8 rounded-lg shadow-md max-w-md w-full">
-        <h1 className="text-2xl font-bold mb-6 text-center">Sign Up</h1>
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 text-black">
+      <div className="bg-white p-8 rounded-lg shadow-md max-w-md w-full text-black">
+        <h1 className="text-2xl font-bold mb-6 text-center text-black">Sign Up</h1>
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="text"
             placeholder="Name" // Change label to Name
             value={name}
             onChange={(e) => setName(e.target.value)} // Change to setName
-            className="w-full p-2 border rounded-md"
+            className="w-full p-2 border rounded-md text-black"
             required
           />
           <input
@@ -40,7 +40,7 @@ export default function SignUp() {
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full p-2 border rounded-md"
+            className="w-full p-2 border rounded-md text-black"
             required
           />
           <input
@@ -48,18 +48,18 @@ export default function SignUp() {
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full p-2 border rounded-md"
+            className="w-full p-2 border rounded-md text-black"
             required
           />
           <button
             type="submit"
-            className="w-full p-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+            className="w-full p-2 bg-yellow-600 text-black rounded-md hover:bg-yellow-700"
           >
             Sign Up
           </button>
         </form>
         <p className="mt-4 text-center">
-          Already have an account? <a href="/auth/signin" className="text-blue-600">Sign In</a>
+          Already have an account? <a href="/auth/signin" className="text-black">Sign In</a>
         </p>
       </div>
     </div>

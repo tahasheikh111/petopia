@@ -7,8 +7,11 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useState, useRef } from "react";
 import { supabase } from "@/lib/supabaseClient";
+import { useSession } from "next-auth/react";
+
 
 const AddProduct = () => {
+  const { data: session, status } = useSession(); // Get session data
   const [category, setCategory] = useState("");
   const [file, setFile] = useState(null);
   const [imageUrl, setImageUrl] = useState("");
@@ -16,6 +19,17 @@ const AddProduct = () => {
   const ref_name = useRef(null);
   const ref_price = useRef(null);
   const ref_description = useRef(null);
+
+  if (status === "loading") {
+    return <p>Loading...</p>; // Optional loading state while session is loading
+  }
+  // Check if the session is not available and handle accordingly
+  if (!session) {
+    alert("Please log in to add products.");
+    return;
+  }
+  // Log user ID to console (after verifying session)
+  console.log(session.user.id);
 
   // Function to handle image upload
   const handleImageUpload = async (file) => {
@@ -77,6 +91,7 @@ const AddProduct = () => {
         const response = await fetch("/api/addproduct", {
           method: "POST",
           body: JSON.stringify({
+            user_id: session.user.id,
             prod_name: input_name,
             prod_price: input_price,
             prod_description: input_description,

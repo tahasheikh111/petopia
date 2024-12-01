@@ -84,3 +84,35 @@ body {
     @apply bg-background text-foreground;
   }
 }
+html{
+  background-color: white;
+}
+
+.custom-marker {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  pointer-events: auto;
+}
+
+.mapboxgl-popup {
+  max-width: 250px;
+}
+
+.mapboxgl-popup-content {
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.popup-content {
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.popup-content h3 {
+  margin: 0 0 8px 0;
+  font-weight: 600;
+}
+
+.popup-content p {
+  margin: 4px 0;
+  color: #666;
+}

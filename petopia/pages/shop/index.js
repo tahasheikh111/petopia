@@ -1,5 +1,3 @@
-'use client'
-
 import { useEffect, useState } from 'react'
 import SearchItem from '@/components/SearchItem'
 import Categories from '@/components/Categories'
@@ -88,12 +86,14 @@ export default function FeaturedProducts(props) {
 }
 
 export async function getStaticProps() {
-  const response = await fetch('http://localhost:3000/api/addproduct')
-  const data = await response.json()
+  const response = await fetch('http://localhost:3000/api/addproduct');
+  const data = await response.json();
+
+  console.log('Fetched Products:', data.products); // Debugging output
 
   return {
     props: {
-      products: data.prod,
+      products: data.products || [],
     },
-  }
+  };
 }
